@@ -18,7 +18,7 @@
                     </a>
                     <div class="collapse" id="actions-set1" data-parent="#workflow-action-collapse">
                         <ul class="actions-list">
-                            <li draggable="true" @drag="onDrag($event)"><span>Send email</span> <i
+                            <li draggable="true" @dragstart="onDragStart($event, 'Send Email')"><span>Send email</span> <i
                                     class="icon icon-resize-plus-2"></i>
                             </li>
                             <li draggable="true"><span>Send a site message</span> <i class="icon icon-resize-plus-2"></i>
@@ -135,6 +135,10 @@ export default {
     methods: {
         onDrag(event) {
             console.log(event)
+        },
+        onDragStart(event, name) {
+            console.log("Drag Started ", event, name);
+            event.dataTransfer.setData("text", name);
         }
     }
 }
