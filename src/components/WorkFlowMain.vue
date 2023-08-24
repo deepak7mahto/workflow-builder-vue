@@ -38,6 +38,7 @@
                 </ul>
             </li>
 
+            <!-- <WorkFlowNodeSample /> -->
 
         </ul>
 
@@ -52,34 +53,36 @@ export default {
     data: function () {
         return {
             tree: {
-                id: 'root',
-                children: [
-                    { id: 'start_automation', children: [] },
-                    { id: 'send_mail', children: [] },
+                name: 'root',
+                id: 1, children: [
+                    { name: 'start_automation', id: 2, children: [] },
+                    { name: 'send_mail', id: 3, children: [] },
                     {
-                        id: 'if-else', children: [
+                        name: 'if-else', id: 4, children: [
                             {
-                                id: 'yes', children: [
-                                    { id: 'send_mail', children: [] },
-                                    { id: 'send_mail', children: [] },
+                                name: 'yes', id: 5, children: [
+                                    { name: 'send_mail', id: 6, children: [] },
+                                    { name: 'send_mail', id: 7, children: [] },
                                 ]
                             },
                             {
-                                id: 'no', children: [
+                                name: 'no', id: 8, children: [
+                                    { name: 'send_mail', id: 3, children: [] },
+
                                     {
-                                        id: 'split', children: [
+                                        name: 'split', id: 9, children: [
                                             {
-                                                id: 'split_left', children: [
-                                                    { id: 'send_mail', children: [] },
+                                                name: 'split_left', id: 10, children: [
+                                                    { name: 'send_mail', id: 11, children: [] },
                                                 ]
                                             },
                                             {
-                                                id: 'split_right', children: [
-                                                    { id: 'send_mail', children: [] },
+                                                name: 'split_right', id: 12, children: [
+                                                    { name: 'send_mail', id: 13, children: [] },
                                                 ]
                                             },
                                         ]
-                                    }
+                                    },
                                 ]
                             },
                         ]
