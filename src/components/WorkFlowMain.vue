@@ -31,79 +31,13 @@
                     </li>
                 </ul>
             </li>
+
             <li>
                 <ul class="flow_inner">
-
-                    <StartAutomation />
-
-                    <TwoSideNode />
-
-                    <SendMailNode />
-
-                    <EndNewNode />
-
+                    <WorkFlowNode :node="tree" />
                 </ul>
             </li>
-            <li>
-                <ul class="flow_split">
-                    <li>
-                        <SplitLeftNode />
-                        <ul class="flow_inner">
-                            <AddDealNode />
 
-                            <TwoSideNode />
-
-                            <SubscribeNode />
-
-                            <EndNewNode />
-                        </ul>
-                    </li>
-                    <li>
-                        <SplitRightNode />
-                        <ul class="flow_inner">
-
-                            <WaitNode />
-
-                            <EndNewNode />
-
-                            <li>
-                                <ul class="flow_split">
-                                    <li>
-                                        <SplitLeftNode />
-
-                                        <ul class="flow_inner">
-                                            <YesNode />
-
-                                            <TwoSideNode />
-
-                                            <WaitNode />
-
-                                            <TwoSideNode />
-
-                                            <EndAutomationNode />
-
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <SplitRightNode />
-
-                                        <ul class="flow_inner">
-                                            <NoNode />
-
-                                            <TwoSideNode />
-
-                                            <WaitNode />
-
-                                            <EndNewNode />
-
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
 
         </ul>
 
@@ -111,34 +45,51 @@
 </template>
 
 <script>
-import EndNewNode from './NewNode/EndNewNode.vue';
-import SendMailNode from './DataNodes/SendMailNode.vue';
-import TwoSideNode from './NewNode/TwoSideNewNode.vue';
-import WaitNode from './DataNodes/WaitNode.vue';
-import EndAutomationNode from './DataNodes/EndAutomationNode.vue';
-import YesNode from './DataNodes/YesNode.vue';
-import NoNode from './DataNodes/NoNode.vue';
-import SubscribeNode from './DataNodes/SubscribeNode.vue';
-import AddDealNode from './DataNodes/AddDealNode.vue';
-import StartAutomation from './DataNodes/StartAutomationNode.vue';
-import SplitLeftNode from './DataNodes/SplitLeftNode.vue';
-import SplitRightNode from './DataNodes/SplitRightNode.vue';
 
+import WorkFlowNode from './WorkFlowNode.vue';
 
 export default {
+    data: function () {
+        return {
+            tree: {
+                id: 'root',
+                children: [
+                    { id: 'start_automation', children: [] },
+                    { id: 'send_mail', children: [] },
+                    {
+                        id: 'if-else', children: [
+                            {
+                                id: 'yes', children: [
+                                    { id: 'send_mail', children: [] },
+                                    { id: 'send_mail', children: [] },
+                                ]
+                            },
+                            {
+                                id: 'no', children: [
+                                    {
+                                        id: 'split', children: [
+                                            {
+                                                id: 'split_left', children: [
+                                                    { id: 'send_mail', children: [] },
+                                                ]
+                                            },
+                                            {
+                                                id: 'split_right', children: [
+                                                    { id: 'send_mail', children: [] },
+                                                ]
+                                            },
+                                        ]
+                                    }
+                                ]
+                            },
+                        ]
+                    },
+                ],
+            }
+        };
+    },
     components: {
-        EndNewNode,
-        SendMailNode,
-        TwoSideNode,
-        WaitNode,
-        EndAutomationNode,
-        YesNode,
-        NoNode,
-        SubscribeNode,
-        AddDealNode,
-        StartAutomation,
-        SplitLeftNode,
-        SplitRightNode
+        WorkFlowNode,
     }
 }
 </script>
