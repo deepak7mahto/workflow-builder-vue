@@ -15,7 +15,8 @@ import { useWorkFlowStore } from '../../store/index';
 
 export default {
     props: {
-        node: { type: Object },
+        node: Object,
+        parent: Object
     },
     data: function () {
         return {
@@ -35,7 +36,7 @@ export default {
             const store = useWorkFlowStore();
             this.showDropArea = false;
             const data = event.dataTransfer.getData("text");
-            store.addNode(this.node, data);
+            store.addNode(this.parent, data);
         }
     }
 }

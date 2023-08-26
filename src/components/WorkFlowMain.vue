@@ -48,47 +48,17 @@
 <script>
 
 import WorkFlowNode from './WorkFlowNode.vue';
+import { useWorkFlowStore } from '../store/index';
 
 export default {
     data: function () {
-        return {
-            tree: {
-                name: 'root',
-                id: 1, children: [
-                    { name: 'start_automation', id: 2, children: [] },
-                    { name: 'send_mail', id: 3, children: [] },
-                    {
-                        name: 'if-else', id: 4, children: [
-                            {
-                                name: 'yes', id: 5, children: [
-                                    { name: 'send_mail', id: 6, children: [] },
-                                    { name: 'send_mail', id: 7, children: [] },
-                                ]
-                            },
-                            {
-                                name: 'no', id: 8, children: [
-                                    { name: 'send_mail', id: 3, children: [] },
 
-                                    {
-                                        name: 'split', id: 9, children: [
-                                            {
-                                                name: 'split_left', id: 10, children: [
-                                                    { name: 'send_mail', id: 11, children: [] },
-                                                ]
-                                            },
-                                            {
-                                                name: 'split_right', id: 12, children: [
-                                                    { name: 'send_mail', id: 13, children: [] },
-                                                ]
-                                            },
-                                        ]
-                                    },
-                                ]
-                            },
-                        ]
-                    },
-                ],
-            }
+        const store = useWorkFlowStore();
+
+        console.log(store)
+
+        return {
+            tree: store.getTree
         };
     },
     components: {
