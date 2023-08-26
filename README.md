@@ -1,4 +1,4 @@
-# tree-view-app
+# Workflow Builder Vue
 
 ## Project setup
 ```
