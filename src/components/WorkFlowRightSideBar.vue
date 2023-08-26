@@ -133,11 +133,7 @@
 <script>
 export default {
     methods: {
-        onDrag(event) {
-            console.log(event)
-        },
         onDragStart(event, name) {
-            console.log("Drag Started ", event, name);
             event.dataTransfer.setData("text", name);
         }
     }
