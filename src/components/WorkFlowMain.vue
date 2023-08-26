@@ -49,17 +49,11 @@
 
 import WorkFlowNode from './WorkFlowNode.vue';
 import { useWorkFlowStore } from '../store/index';
+import { mapState } from 'pinia';
 
 export default {
-    data: function () {
-
-        const store = useWorkFlowStore();
-
-        console.log(store)
-
-        return {
-            tree: store.getTree
-        };
+    computed: {
+        ...mapState(useWorkFlowStore, { tree: 'tree' })
     },
     components: {
         WorkFlowNode,

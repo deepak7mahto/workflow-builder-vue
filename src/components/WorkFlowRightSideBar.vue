@@ -48,7 +48,8 @@
                             </li>
                             <li draggable="true"><span>Goal</span> <i class="icon icon-resize-plus-2"></i>
                             </li>
-                            <li draggable="true"><span>Start an automation</span> <i class="icon icon-resize-plus-2"></i>
+                            <li draggable="true" @dragstart="onDragStart($event, 'start_automation')"><span>Start an
+                                    automation</span> <i class="icon icon-resize-plus-2"></i>
                             </li>
                             <li draggable="true"><span>End this automation</span> <i class="icon icon-resize-plus-2"></i>
                             </li>

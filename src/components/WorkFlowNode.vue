@@ -1,6 +1,6 @@
 <template>
-    <StartAutomationNode v-if="node.name === 'start_automation'" />
-    <SendMailNode v-if="node.name === 'send_mail'" />
+    <StartAutomationNode v-if="node.name === 'start_automation'" :node="node" />
+    <SendMailNode v-if="node.name === 'send_mail'" :node="node" />
 
     <template v-if="node.name === 'if-else'">
         <li>
@@ -10,9 +10,9 @@
                     <ul class="flow_inner">
                         <YesNode />
                         <template v-if="node.children.length > 0">
-                            <TwoSideNewNode :node="node" :parent="parent" />
-                            <WorkFlowNode v-for="child in node.children[0].children" :key="child.key" :node="child"
-                                :depth="depth + 1" :parent="node" />
+                            <TwoSideNewNode :node="node" :parent="parent" :nodeIndex="nodeIndex" />
+                            <WorkFlowNode v-for="(child, index) in node.children[0].children" :key="child.id" :node="child"
+                                :depth="depth + 1" :parent="node" :nodeIndex="index" />
                         </template>
                     </ul>
                 </li>
@@ -20,10 +20,10 @@
                     <SplitRightNode />
                     <ul class="flow_inner">
                         <NoNode />
-                        <TwoSideNewNode :node="node" :parent="parent" />
+                        <TwoSideNewNode :node="node" :parent="parent" :nodeIndex="nodeIndex" />
                         <template v-if="node.children.length > 0">
-                            <WorkFlowNode v-for="child in node.children[1].children" :key="child.key" :node="child"
-                                :depth="depth + 1" :parent="node" />
+                            <WorkFlowNode v-for="(child, index) in node.children[1].children" :key="child.id" :node="child"
+                                :depth="depth + 1" :parent="node" :nodeIndex="index" />
                         </template>
                     </ul>
 
@@ -37,20 +37,20 @@
                 <li>
                     <SplitLeftNode />
                     <ul class="flow_inner">
-                        <TwoSideNewNode :node="node" :parent="parent" />
+                        <TwoSideNewNode :node="node" :parent="parent" :nodeIndex="nodeIndex" />
                         <template v-if="node.children.length > 0 && node.children[0].name === 'split_left'">
-                            <WorkFlowNode v-for="child in node.children[0].children" :key="child.key" :node="child"
-                                :depth="depth + 1" :parent="node" />
+                            <WorkFlowNode v-for="(child, index) in node.children[0].children" :key="child.id" :node="child"
+                                :depth="depth + 1" :parent="node" :nodeIndex="index" />
                         </template>
                     </ul>
                 </li>
                 <li>
                     <SplitRightNode />
                     <ul class="flow_inner">
-                        <TwoSideNewNode :node="node" :parent="parent" />
+                        <TwoSideNewNode :node="node" :parent="parent" :nodeIndex="nodeIndex" />
                         <template v-if="node.children.length > 0 && node.children[1].name === 'split_right'">
-                            <WorkFlowNode v-for="child in node.children[1].children" :key="child.key" :node="child"
-                                :depth="depth + 1" :parent="node" />
+                            <WorkFlowNode v-for="(child, index) in node.children[1].children" :key="child.id" :node="child"
+                                :depth="depth + 1" :parent="node" :nodeIndex="index" />
                         </template>
                     </ul>
 
@@ -60,8 +60,9 @@
     </template>
     <template v-else>
         <ul class="flow_inner">
-            <TwoSideNewNode v-if="showTwoSideNode" :node="node" :parent="parent" />
-            <WorkFlowNode v-for="child in node.children" :key="child.key" :node="child" :depth="depth + 1" :parent="node" />
+            <TwoSideNewNode v-if="showTwoSideNode" :node="node" :parent="parent" :nodeIndex="nodeIndex" />
+            <WorkFlowNode v-for="(child, index) in node.children" :key="child.id" :node="child" :depth="depth + 1"
+                :parent="node" :nodeIndex="index" />
         </ul>
     </template>
 </template>
@@ -85,6 +86,7 @@ export default {
             type: Number,
             default: 0
         },
+        nodeIndex: Number
     },
     computed: {
         showStartNode() {
