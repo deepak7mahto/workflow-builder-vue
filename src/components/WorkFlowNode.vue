@@ -1,6 +1,6 @@
 <template>
-    <StartAutomationNode v-if="node.name === 'start_automation'" :node="node" />
-    <SendMailNode v-if="node.name === 'send_mail'" :node="node" />
+    <StartAutomationNode v-if="node.name === 'start_automation'" :node="node" :parent="parent" />
+    <SendMailNode v-if="node.name === 'send_mail'" :node="node" :parent="parent" />
 
     <template v-if="node.name === 'if-else'">
         <li>

@@ -4,22 +4,9 @@ export class TreeNode {
   constructor(name) {
     this.name = name;
     this.id = (Math.random() * 100000).toFixed(0);
-    this.parent = null;
     this.children = [];
   }
 }
-
-const noNode = new TreeNode('no');
-
-// noNode.children = [new TreeNode('send_mail', new TreeNode('send_mail'))]
-
-const yesNode = new TreeNode('yes');
-
-// yesNode.children = [new TreeNode('send_mail', new TreeNode('send_mail'))]
-
-const ifElseNode = new TreeNode('if-else');
-
-ifElseNode.children = [yesNode, noNode];
 
 const initialState = new TreeNode('root');
 
@@ -37,10 +24,18 @@ export const useWorkFlowStore = defineStore('workflow', {
 
       function insertTreeNode(node, parentId, data) {
 
-        console.log(node.id, parentId)
-
         if (node.id === parentId) {
           if (data === 'if-else') {
+            console.log(node)
+
+            const noNode = new TreeNode('no');
+
+            const yesNode = new TreeNode('yes');
+
+            const ifElseNode = new TreeNode('if-else');
+
+            ifElseNode.children = [yesNode, noNode];
+
             node.children.splice(nodeIndex + 1, 0, ifElseNode)
           } else {
             node.children.splice(nodeIndex + 1, 0, new TreeNode(data))
@@ -58,20 +53,16 @@ export const useWorkFlowStore = defineStore('workflow', {
     },
     removeNode(node) {
 
-      function removeTreeNode(currentTree) {
+      function removeTreeNode(tree) {
 
-        let latestChildren = currentTree.children.filter((item) => item.id !== node.id);
+        tree.children = tree.children.filter((child) => child.id !== node.id);
 
-        latestChildren = latestChildren.map((currentItem) => {
-          return removeTreeNode(currentItem);
-        });
-
-        return { ...currentTree, children: latestChildren }
+        for (const child of tree.children) {
+          removeTreeNode(child)
+        }
       }
 
-      const newTree = removeTreeNode({ ...this.tree });
-
-      this.tree = { ...newTree }
+      removeTreeNode(this.tree);
     }
   },
   persist: true,

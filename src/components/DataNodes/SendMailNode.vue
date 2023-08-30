@@ -16,7 +16,8 @@ import { useWorkFlowStore } from '../../store/index';
 
 export default {
   props: {
-    node: Object
+    node: Object,
+    parent: Object
   },
   data() {
     return {
@@ -39,7 +40,7 @@ export default {
   },
   methods: {
     handleDeleteButtonClicked() {
-      useWorkFlowStore().removeNode(this.node);
+      useWorkFlowStore().removeNode(this.node, this.parent);
     }
   }
 }
