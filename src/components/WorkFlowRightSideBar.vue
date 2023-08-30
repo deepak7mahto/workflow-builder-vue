@@ -40,7 +40,8 @@
                         <ul class="actions-list">
                             <li draggable="true"><span>Wait</span> <i class="icon icon-resize-plus-2"></i>
                             </li>
-                            <li draggable="true"><span>If / Else</span> <i class="icon icon-resize-plus-2"></i>
+                            <li draggable="true" @dragstart="onDragStart($event, 'if-else')"><span>If / Else</span> <i
+                                    class="icon icon-resize-plus-2"></i>
                             </li>
                             <li draggable="true"><span>Split</span> <i class="icon icon-resize-plus-2"></i>
                             </li>

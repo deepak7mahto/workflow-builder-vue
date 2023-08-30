@@ -32,7 +32,6 @@ export default {
   mounted() {
     const myThis = this;
     window.addEventListener('click', function (event) {
-      console.log(event.target.className)
       if (event.target.className === `icon icon-trash ${myThis.node.id}`) {
         myThis.handleDeleteButtonClicked();
       }

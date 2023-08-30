@@ -10,9 +10,9 @@
                     <ul class="flow_inner">
                         <YesNode />
                         <template v-if="node.children.length > 0">
-                            <TwoSideNewNode :node="node" :parent="parent" :nodeIndex="nodeIndex" />
+                            <TwoSideNewNode :node="node" :parent="node.children[0]" :nodeIndex="nodeIndex" />
                             <WorkFlowNode v-for="(child, index) in node.children[0].children" :key="child.id" :node="child"
-                                :depth="depth + 1" :parent="node" :nodeIndex="index" />
+                                :depth="depth + 1" :parent="node.children[0]" :nodeIndex="index" />
                         </template>
                     </ul>
                 </li>
@@ -20,10 +20,10 @@
                     <SplitRightNode />
                     <ul class="flow_inner">
                         <NoNode />
-                        <TwoSideNewNode :node="node" :parent="parent" :nodeIndex="nodeIndex" />
+                        <TwoSideNewNode :node="node" :parent="node.children[1]" :nodeIndex="nodeIndex" />
                         <template v-if="node.children.length > 0">
                             <WorkFlowNode v-for="(child, index) in node.children[1].children" :key="child.id" :node="child"
-                                :depth="depth + 1" :parent="node" :nodeIndex="index" />
+                                :depth="depth + 1" :parent="node.children[1]" :nodeIndex="index" />
                         </template>
                     </ul>
 
@@ -37,20 +37,20 @@
                 <li>
                     <SplitLeftNode />
                     <ul class="flow_inner">
-                        <TwoSideNewNode :node="node" :parent="parent" :nodeIndex="nodeIndex" />
+                        <TwoSideNewNode :node="node" :parent="node.children[0]" :nodeIndex="nodeIndex" />
                         <template v-if="node.children.length > 0 && node.children[0].name === 'split_left'">
                             <WorkFlowNode v-for="(child, index) in node.children[0].children" :key="child.id" :node="child"
-                                :depth="depth + 1" :parent="node" :nodeIndex="index" />
+                                :depth="depth + 1" :parent="node.children[0]" :nodeIndex="index" />
                         </template>
                     </ul>
                 </li>
                 <li>
                     <SplitRightNode />
                     <ul class="flow_inner">
-                        <TwoSideNewNode :node="node" :parent="parent" :nodeIndex="nodeIndex" />
+                        <TwoSideNewNode :node="node" :parent="node.children[1]" :nodeIndex="nodeIndex" />
                         <template v-if="node.children.length > 0 && node.children[1].name === 'split_right'">
                             <WorkFlowNode v-for="(child, index) in node.children[1].children" :key="child.id" :node="child"
-                                :depth="depth + 1" :parent="node" :nodeIndex="index" />
+                                :depth="depth + 1" :parent="node.children[1]" :nodeIndex="index" />
                         </template>
                     </ul>
 

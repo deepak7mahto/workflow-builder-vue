@@ -9,17 +9,17 @@ export class TreeNode {
   }
 }
 
-// const noNode = new TreeNode('no');
+const noNode = new TreeNode('no');
 
 // noNode.children = [new TreeNode('send_mail', new TreeNode('send_mail'))]
 
-// const yesNode = new TreeNode('yes');
+const yesNode = new TreeNode('yes');
 
 // yesNode.children = [new TreeNode('send_mail', new TreeNode('send_mail'))]
 
-// const ifElseNode = new TreeNode('if-else');
+const ifElseNode = new TreeNode('if-else');
 
-// ifElseNode.children = [yesNode, noNode];
+ifElseNode.children = [yesNode, noNode];
 
 const initialState = new TreeNode('root');
 
@@ -35,29 +35,34 @@ export const useWorkFlowStore = defineStore('workflow', {
   actions: {
     addNode(parent, nodeIndex, data) {
 
-      function insertTreeNode(currentTree) {
-        if (currentTree.id === parent.id) {
-          currentTree.children.splice(nodeIndex + 1, 0, new TreeNode(data))
+      function insertTreeNode(node, parentId, data) {
+
+        console.log(node.id, parentId)
+
+        if (node.id === parentId) {
+          if (data === 'if-else') {
+            node.children.splice(nodeIndex + 1, 0, ifElseNode)
+          } else {
+            node.children.splice(nodeIndex + 1, 0, new TreeNode(data))
+          }
+
         }
 
-        const latestChildren = currentTree.children.map((currentItem) => {
-          return insertTreeNode(currentItem);
-        });
+        for (const child of node.children) {
+          insertTreeNode(child, parentId, data)
+        }
 
-        return { ...currentTree, children: latestChildren }
       }
 
-      const newTree = insertTreeNode({ ...this.tree });
-
-      this.tree = { ...newTree }
-
+      insertTreeNode(this.tree, parent.id, data);
     },
     removeNode(node) {
-      console.log('Removing Node', node);
 
       function removeTreeNode(currentTree) {
 
-        const latestChildren = currentTree.children.filter((item) => item.id !== node.id).map((currentItem) => {
+        let latestChildren = currentTree.children.filter((item) => item.id !== node.id);
+
+        latestChildren = latestChildren.map((currentItem) => {
           return removeTreeNode(currentItem);
         });
 
