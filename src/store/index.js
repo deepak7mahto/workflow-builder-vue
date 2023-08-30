@@ -26,17 +26,22 @@ export const useWorkFlowStore = defineStore('workflow', {
 
         if (node.id === parentId) {
           if (data === 'if-else') {
-            console.log(node)
+
+            const yesChildren = node.children.slice(nodeIndex + 1);
+
 
             const noNode = new TreeNode('no');
 
             const yesNode = new TreeNode('yes');
 
+            yesNode.children = yesChildren;
+
             const ifElseNode = new TreeNode('if-else');
 
             ifElseNode.children = [yesNode, noNode];
 
-            node.children.splice(nodeIndex + 1, 0, ifElseNode)
+            node.children = [...node.children.slice(0, nodeIndex + 1), ifElseNode];
+
           } else {
             node.children.splice(nodeIndex + 1, 0, new TreeNode(data))
           }

@@ -1,5 +1,4 @@
 <template>
-  <li>
     <div class="workflow_card --green --with-icon">
       <div class="bubble">
         <i class="fas fa-sync-alt"></i>
@@ -7,7 +6,6 @@
         <i class="icon-drag icon-resize-plus-2"></i>
       </div>
     </div>
-  </li>
 </template>
 
 <script>

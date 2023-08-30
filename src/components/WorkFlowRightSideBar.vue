@@ -21,12 +21,12 @@
                             <li draggable="true" @dragstart="onDragStart($event, 'send_mail')"><span>Send email</span> <i
                                     class="icon icon-resize-plus-2"></i>
                             </li>
-                            <li draggable="true"><span>Send a site message</span> <i class="icon icon-resize-plus-2"></i>
+                            <!-- <li draggable="true"><span>Send a site message</span> <i class="icon icon-resize-plus-2"></i>
                             </li>
                             <li draggable="true"><span>Send SMS</span> <i class="icon icon-resize-plus-2"></i>
                             </li>
                             <li draggable="true"><span>Notify Someone</span> <i class="icon icon-resize-plus-2"></i>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
@@ -38,12 +38,13 @@
                     </a>
                     <div class="collapse" id="actions-set2" data-parent="#workflow-action-collapse">
                         <ul class="actions-list">
-                            <li draggable="true"><span>Wait</span> <i class="icon icon-resize-plus-2"></i>
+                            <li draggable="true" @dragstart="onDragStart($event, 'wait')"><span>Wait</span> <i
+                                    class="icon icon-resize-plus-2"></i>
                             </li>
                             <li draggable="true" @dragstart="onDragStart($event, 'if-else')"><span>If / Else</span> <i
                                     class="icon icon-resize-plus-2"></i>
                             </li>
-                            <li draggable="true"><span>Split</span> <i class="icon icon-resize-plus-2"></i>
+                            <!-- <li draggable="true"><span>Split</span> <i class="icon icon-resize-plus-2"></i>
                             </li>
                             <li draggable="true"><span>Go to</span> <i class="icon icon-resize-plus-2"></i>
                             </li>
@@ -57,11 +58,11 @@
                             <li draggable="true"><span>End other automation</span> <i class="icon icon-resize-plus-2"></i>
                             </li>
                             <li draggable="true"><span>Webhook</span> <i class="icon icon-resize-plus-2"></i>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
-                <div class="actions-set">
+                <!-- <div class="actions-set">
                     <a class="collapsed" data-toggle="collapse" href="#actions-set3" role="button" aria-expanded="false"
                         aria-controls="actions-set3">
                         <span>Contacts</span>
@@ -91,8 +92,8 @@
                             </li>
                         </ul>
                     </div>
-                </div>
-                <div class="actions-set">
+                </div> -->
+                <!-- <div class="actions-set">
                     <a class="collapsed" data-toggle="collapse" href="#actions-set4" role="button" aria-expanded="false"
                         aria-controls="actions-set4">
                         <span>CRM</span>
@@ -124,7 +125,7 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div> -->
 
             </div>
         </div>
