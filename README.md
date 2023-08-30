@@ -10,15 +10,24 @@ yarn install
 yarn serve
 ```
 
-### Compiles and minifies for production
+### Data Structre 
+
 ```
-yarn build
+Nested Json Data Structure is used with this sample data having parent child relationship
+
+[{ name: 'Parent', id: 1, children : [
+    { name: 'Child 1', id: 2, children: []},
+    { name: 'Child 2', id: 3, children: []}
+]}]
+
+For the current use case this data structure is sufficient , later we can enhance this if we require more fields 
+
 ```
 
-### Lints and fixes files
-```
-yarn lint
-```
+### Demo Version Link
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```
+Demo can be access on this url
+
+https://workflow-builder-vue.netlify.app/#
+```
